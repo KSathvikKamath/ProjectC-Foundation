@@ -1,0 +1,33 @@
+--Q.) INNER JOIN = MATCHING RECORDS
+select o.orderid,o.orderdate,c.companyname
+from Orders o inner join Clients c
+on o.ClientID = c.ClientID
+--Q.) LEFT OUTER JOIN (LEFT hand side table all records even though matching or 
+--no matching in right hand side table)
+select o.orderid,o.orderdate,c.companyname
+from orders o left outer join clients c
+on o.clientid=c.ClientID
+ 
+--Q.) Right Outer Join
+select c.CompanyName,o.orderid,o.orderdate
+from clients c right outer join orders o
+on c.clientid=o.ClientID
+ 
+--Q.) Full outer join
+select c.CompanyName,o.orderid,o.orderdate
+from clients c full outer join orders o
+on c.clientid=o.ClientID
+ 
+alter table Orders
+alter column ClientID char(10)
+ 
+ 
+CREATE TABLE Orders 
+(
+OrderID INT CONSTRAINT OrderID_PK PRIMARY KEY IDENTITY (1,1),
+OrderDate SMALLDATETIME, --CONSTRAINT ODate_NN NOT NULL DEFAULT GetDate() CONSTRAINT ODate_CK CHECK(OrderDate>=GetDate()),
+ClientID CHAR(10) CONSTRAINT CID_NN FOREIGN KEY REFERENCES Clients(ClientID),
+ProductID CHAR(10) CONSTRAINT PID_NN NOT NULL CONSTRAINT PID_FrK FOREIGN KEY REFERENCES Products (ProductID),
+Quantity INT CONSTRAINT Qty_NN NOT NULL DEFAULT 100,
+ShippingDate SMALLDATETIME --CONSTRAINT SDate_NN NOT NULL, CONSTRAINT SDate_CK CHECK(ShippingDate>OrderDate)
+) 
