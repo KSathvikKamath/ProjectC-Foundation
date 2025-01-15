@@ -1,0 +1,58 @@
+
+Lambda expressions are anonymous functions that contain expressions or sequences of operators. All lambda expressions use the lambda operator =>, which can be read as “goes to” or “becomes”. The left side of the lambda operator specifies the input parameters, and the right side holds an expression or a code block that works with the entry parameters. Usually, lambda expressions are used as predicates or instead of delegates (a type that references a method).
+
+
+
+Serialisation scenario
+
+1.To save and load game progress, serialize the player's game state (represented as a class or struct) into a persistent file format (e.g., JSON, XML, binary) and deserialize it when the player loads the game
+
+
+2.Product inventory Code
+
+
+ delegate saves a reference to a method and allows you to call that method later. 
+ The method can be defined anywhere, and as long as it matches the delegate’s signature
+1 Define a delegate.
+
+2 Method that matches the delegate's signature.
+
+3 Assign the method to the delegate.
+
+4 Call the method through the delegate.
+
+Event
+An event in C# is like a “notification system” built on top of delegates. It’s a way for one part of your program (the broadcaster) to notify other parts (the listeners) when something happens.
+
+
+1. Define a delegate
+public delegate void AlarmHandler();
+
+2. Define an event based on the delegate
+public event AlarmHandler FireAlarm;
+
+3. Method to raise the event
+public void DetectFire()
+{
+    Console.WriteLine("Fire detected!");
+    FireAlarm?.Invoke(); // Notify all subscribers
+}
+
+4.Methods that respond to the event
+public void CallFireDepartment()
+{
+    Console.WriteLine("Calling the fire department...");
+}
+
+public void OpenEmergencyExits()
+{
+    Console.WriteLine("Opening emergency exits...");
+}
+
+5. Subscribing to the event - adding 
+FireAlarmSystem system = new FireAlarmSystem();
+system.FireAlarm += CallFireDepartment;
+system.FireAlarm += OpenEmergencyExits;
+
+6. Trigger Event
+https://dev.to/sebastiandevelops/understanding-c-delegates-and-events-with-real-world-examples-2an6
